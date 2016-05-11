@@ -128,10 +128,14 @@ namespace Jackett.Indexers
 
                         foreach (JObject t in r["torrents"])
                         {
+                            var media = (string)t["media"];
+                            var encoding = (string)t["encodig"];
+                            var format = (string)t["format"];
+
                             var release = new ReleaseInfo();
                             release.PublishDate = pubDate;
-                            release.Title = $"{showName} {groupName}";
-                            release.Description = $"{showName} {groupName}";
+                            release.Title = $"{showName} {groupName} {encoding} {media} {format}";
+                            release.Description = release.Title;
                             FillReleaseInfoFromJson(release, t);
                             releases.Add(release);
                         }
